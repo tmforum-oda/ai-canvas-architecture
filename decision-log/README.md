@@ -25,7 +25,7 @@ Each Architecture Decision Record (ADR) captures:
 Typical ADR status values include:
 
 - **Proposed** – Decision is under discussion
-- **Proposed** – Decision is agreed and adopted
+- **Accepted** – Decision is agreed and adopted
 - **Superseded** – Decision has been replaced by another ADR
 - **Deprecated** – Decision is no longer applicable
 
