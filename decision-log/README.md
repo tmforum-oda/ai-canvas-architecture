@@ -25,7 +25,7 @@ Each Architecture Decision Record (ADR) captures:
 Typical ADR status values include:
 
 - **Proposed** – Decision is under discussion
-- **Accepted** – Decision is agreed and adopted
+- **Proposed** – Decision is agreed and adopted
 - **Superseded** – Decision has been replaced by another ADR
 - **Deprecated** – Decision is no longer applicable
 
@@ -35,12 +35,12 @@ Typical ADR status values include:
 
 | Decision | Date | Status | Doc reference | Made By |
 |----------|-------|-------|---------------|---------|
-| ADR-001 – Agentic Components as Primary Deployable Unit | 2026-03-10 | Accepted | ADR-001-agentic-components.md | Project Foundation |
-| ADR-002 – Interaction Interface Model (OpenAPI, A2A, MCP) | 2026-03-10 | Accepted | ADR-002-interaction-interface-model.md | Project Foundation |
-| ADR-003 – Resource Inventory as Unified Discovery Registry | 2026-03-10 | Accepted | ADR-003-resource-inventory-registry.md | Project Foundation |
-| ADR-004 – Gateway Mediation Architecture (AI Gateway + Interaction Gateway) | 2026-03-10 | Accepted | ADR-004-gateway-architecture.md | Project Foundation |
-| ADR-005 – AI-Native Configuration Resources (AIGatewayConfig, DataResourceConfig) | 2026-03-10 | Accepted | ADR-005-ai-native-config-resources.md | Project Foundation |
-| ADR-006 – Model Onboarding and AI Gateway Integration | 2026-03-10 | Accepted | ADR-006-model-onboarding.md | Project Foundation |
+| ADR-001 – Agentic Components as Primary Deployable Unit | 2026-03-10 | Proposed | ADR-001-agentic-components.md | Project Foundation |
+| ADR-002 – Interaction Interface Model (OpenAPI, A2A, MCP) | 2026-03-10 | Proposed | ADR-002-interaction-interface-model.md | Project Foundation |
+| ADR-003 – Resource Inventory as Unified Discovery Registry | 2026-03-10 | Proposed | ADR-003-resource-inventory-registry.md | Project Foundation |
+| ADR-004 – Gateway Mediation Architecture (AI Gateway + Interaction Gateway) | 2026-03-10 | Proposed | ADR-004-gateway-architecture.md | Project Foundation |
+| ADR-005 – AI-Native Configuration Resources (AIGatewayConfig, DataResourceConfig) | 2026-03-10 | Proposed | ADR-005-ai-native-config-resources.md | Project Foundation |
+| ADR-006 – Model Onboarding and AI Gateway Integration | 2026-03-10 | Proposed | ADR-006-model-onboarding.md | Project Foundation |
 | ADR-007 – Data Resource Architecture and Access Patterns | 2026-03-10 | Proposed | ADR-007-data-resource-architecture.md | Project Foundation |
 
 ---
@@ -80,7 +80,7 @@ Working group members are encouraged to:
 
 - Propose new ADRs when introducing architectural changes
 - Discuss and review proposed ADRs through pull requests
-- Update ADR status when decisions are accepted or superseded
+- Update ADR status when decisions are Proposed or superseded
 
 When creating a new ADR:
 

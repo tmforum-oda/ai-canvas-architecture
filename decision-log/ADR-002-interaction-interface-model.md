@@ -5,7 +5,7 @@ Date: 2026-03-11
 ⸻
 # Status
 
-In progress
+Proposed
 ⸻
 
 # Context
