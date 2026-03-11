@@ -2,31 +2,28 @@
 
 Date: 2026-03-11
 
-⸻
 # Status
 
 Proposed
-⸻
 
 # Context
 
 AI-native ODA Canvas must support the use of custom and provider-hosted machine learning models by Agentic Components.
 
 Models may originate from:
-	•	external provider platforms (for example AWS Bedrock, Google, OpenAI, Groq, Mistral, Cohere)
-	•	internally managed ML models produced through enterprise ML Ops pipelines
-	•	vendor-managed models onboarded for telco-specific workloads
+- external provider platforms (for example AWS Bedrock, Google, OpenAI, Groq, Mistral, Cohere)
+- internally managed ML models produced through enterprise ML Ops pipelines
+- vendor-managed models onboarded for telco-specific workloads
 
 The architecture must define:
-	•	how models are made available inside the Canvas environment
-	•	how components reference models
-	•	how the AI Gateway is configured
-	•	how model discovery works through Resource Inventory
-	•	how this aligns with the earlier architecture decision Decision 20 — ML Model Integration via ML Ops Pipeline
+- how models are made available inside the Canvas environment
+- how components reference models
+- how the AI Gateway is configured
+- how model discovery works through Resource Inventory
+- how this aligns with the earlier architecture decision [Decision 20 — ML Model Integration via ML Ops Pipeline](https://github.com/tmforum-oda/oda-ca-docs/blob/9ef52c078d8f0d72a2d419ba702fdcd8efd6d2d6/Decision-Log/0020-ml-model-integration-via-ml-ops-pipeline.md)
 
 At the same time, the architecture must avoid turning Canvas into a full ML training platform.
 
-⸻
 
 # Decision
 
@@ -42,104 +39,85 @@ ML Ops pipeline = model lifecycle governance
 Canvas = model accessibility and runtime mediation
 
 
-⸻
 
 # Model Onboarding Responsibility
 
 Canvas does not perform:
-	•	model training
-	•	model testing
-	•	model evaluation
-	•	model approval
+- model training
+- model testing
+- model evaluation
+- model approval
 
 These activities belong to the ML Ops pipeline or equivalent external governance process.
 
 Canvas assumes that models referenced for onboarding are already:
-validated
-approved
-governed
+- validated
+- approved
+- governed
 
 Canvas is responsible for making those approved models accessible inside the Canvas environment.
 
-⸻
 
-AIGatewayConfig as the Model Onboarding Resource
+**AIGatewayConfig as the Model Onboarding Resource**
 
 AIGatewayConfig is the canonical Canvas configuration resource for onboarding approved models into the Canvas environment.
 
 It defines:
-	•	available models
-	•	provider metadata
-	•	authentication requirements
-	•	gateway routing metadata
-	•	traffic strategy
-	•	observability integration
-	•	runtime guardrails
+- available models
+- provider metadata
+- authentication requirements
+- gateway routing metadata
+- traffic strategy
+- observability integration
+- runtime guardrails
 
 This resource is reconciled by Canvas operators to configure the AI Gateway.
 
-⸻
 
 # Component Model Dependency Declaration
 
 Components declare model dependencies directly.
 
 Example conceptually:
+```yaml
 spec:
   dependentAIModels:
     - name: gemini-2.5-pro
-
+```
 
 The Canvas control plane resolves these component dependencies against models made available through AIGatewayConfig.
 
 Thus:
-Component declares dependency
-      ↓
-Canvas resolves against AIGatewayConfig
-      ↓
-AI Gateway provides access
+Component declares dependency → Canvas resolves against AIGatewayConfig → AI Gateway provides access
 
 This keeps model consumption simple for component developers while allowing the platform to control which models are actually available.
 
 
-⸻
-
 # Internal and External Model Support
 
 The architecture supports both:
-	•	externally hosted models
-	•	internally managed models
+- externally hosted models
+- internally managed models
 
 Examples:
-	•	AWS Bedrock models
-	•	Google-hosted models
-	•	enterprise-hosted custom models
-	•	ML Ops-managed internal model APIs
+- AWS Bedrock models
+- Google-hosted models
+- enterprise-hosted custom models
+- ML Ops-managed internal model APIs
 
 All of these are made accessible through a common pattern:
-Agentic Component
-      ↓
-AI Gateway
-      ↓
-External provider OR internal model endpoint
+Agentic Component → AI Gateway → External provider OR internal model endpoint
 
 This preserves portability and multi-vendor flexibility.
 
-⸻
 
 # Runtime Mediation
 
 Runtime model access is always mediated through the AI Gateway.
 
 Example:
-Agentic Component
-      ↓
-AI Gateway
-      ↓
-Model provider / model endpoint
+Agentic Component → AI Gateway → Model provider / model endpoint
 
-
-⸻
 
 # Benefits
 
@@ -155,8 +133,6 @@ Allows Resource Inventory to function as the model discovery interface.
 
 Enables secure provider integration through operator-managed configuration.
 
-⸻
-
 # Trade-offs
 
 Canvas depends on external ML Ops governance for model approval.
@@ -167,7 +143,6 @@ Model lifecycle responsibility is distributed across two domains:
 
 This introduces coordination requirements between enterprise ML governance and Canvas platform operations.
 
-⸻
 
 # Future Considerations
 
@@ -176,5 +151,3 @@ Future architecture revisions may evaluate:
 - more explicit model lifecycle visibility in Canvas
 - standardized model approval metadata in Resource Inventory
 - dedicated model governance APIs
-
-⸻
