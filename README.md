@@ -36,16 +36,3 @@ It provides:
 AI-Native ODA Canvas provides a **portable, multi-vendor execution environment for agentic applications**.
 
 ---
-# Repository Structure
-architecture/
-    architecture-definition-document.md
-
-adr/
-    ADR-XXX-description.md
-
-diagrams/
-    layered-architecture/
-    sequences/
-
-open-questions/
-    architecture-open-questions.md
