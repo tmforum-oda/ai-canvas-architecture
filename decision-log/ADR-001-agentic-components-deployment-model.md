@@ -133,7 +133,6 @@ The working group may evaluate introducing a dedicated Agent CRD in future archi
 
 The concept of ODA Solution Components may also evolve to formalize AI-native workload types within the ODA architecture.
 
-
 # Out of Scope
 
 This ADR does not define or decide the following topics:
