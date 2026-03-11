@@ -11,23 +11,23 @@ Proposed
 # Context
 
 The AI-native extension of the ODA Canvas introduces new architectural capabilities for deploying agentic workloads that interact with:
-	•	other agents (a2a)
-	•	tools (mcp)
-	•	APIs (openapi, prometheus, openmetrics)
-	•	models
-	•	enterprise data systems
+    - other agents (a2a)
+	- tools (mcp)
+	- APIs (openapi, prometheus, openmetrics)
+	- models
+	- enterprise data systems
 
 These workloads must integrate with the existing ODA Canvas control-plane model, where:
-	•	components are deployed declaratively
-	•	lifecycle is managed through Kubernetes operators
-	•	resource requirements are expressed in the Component Specification
+	- components are deployed declaratively
+	- lifecycle is managed through Kubernetes operators
+	- resource requirements are expressed in the Component Specification
 
 A key architectural decision is whether Agents should be introduced as independent deployable resources, or whether the existing ODA Component lifecycle model should remain the deployment anchor.
 
 Introducing a dedicated Agent resource type would require:
-	•	a new lifecycle model
-	•	additional operator reconciliation logic
-	•	divergence from the current ODA Canvas architecture
+	- a new lifecycle model
+	- additional operator reconciliation logic
+	- divergence from the current ODA Canvas architecture
 
 At the same time, the architecture must support standardized agent interoperability, including skill discovery and execution using open protocols.
 
@@ -54,10 +54,10 @@ An Agentic Component (ODA Solution Component) is defined as:
 An ODA Component that exposes or consumes AI-native interaction interfaces enabling autonomous or semi-autonomous behavior.
 
 Agentic Components interact with other systems through interaction interfaces such as:
-	•	A2A interfaces
-	•	MCP interfaces
-	•	APIs
-	•	model dependencies
+	- A2A interfaces
+	- MCP interfaces
+	- APIs
+	- model dependencies
 
 These interfaces define how the component participates in an agentic ecosystem.
 
@@ -78,9 +78,9 @@ Agent identity therefore derives from the component’s exposed interaction inte
 
 Agent capabilities and dependencies are expressed through:
 
-• component metadata extensions
-• exposed interaction interfaces
-• dependent interaction interfaces
+- component metadata extensions
+- exposed interaction interfaces
+- dependent interaction interfaces
 
 Agent capabilities are declared through the Component Specification and its interaction interface definitions.
 
@@ -93,18 +93,18 @@ This architecture aligns with the previously documented decision:
 019 — Adopt A2A Protocol as Open Standard for Agent Skill Exposure
 
 According to ADR-019:
-	•	Agents must expose skills through the A2A Protocol
-	•	Agents must publish an Agent Card at:
-            /.well-known/agent-card.json
+	- Agents must expose skills through the A2A Protocol
+	- Agents must publish an Agent Card at:
+        /.well-known/agent-card.json
 
-	•	Agent capabilities must be discoverable and interoperable
+	- Agent capabilities must be discoverable and interoperable
 
 Under ADR-001, this requirement is satisfied by Agentic Components exposing A2A interaction interfaces that comply with the A2A protocol.
 
 This ensures that:
-	•	TM Forum agents remain interoperable
-	•	the Canvas architecture remains aligned with open standards
-	•	the component deployment model remains unchanged.
+	- TM Forum agents remain interoperable
+	- the Canvas architecture remains aligned with open standards
+	- the component deployment model remains unchanged.
 
 ⸻
 
@@ -137,9 +137,9 @@ Agent discovery depends on interaction interface metadata rather than a dedicate
 # Future Considerations
 
 The working group may evaluate introducing a dedicated Agent CRD in future architecture revisions if:
-	•	agents require independent lifecycle management
-	•	agent orchestration becomes a platform responsibility
-	•	richer agent metadata must be managed by the control plane
+	- agents require independent lifecycle management
+	- agent orchestration becomes a platform responsibility
+	- richer agent metadata must be managed by the control plane
 
 The concept of ODA Solution Components may also evolve to formalize AI-native workload types within the ODA architecture.
 
@@ -149,9 +149,9 @@ The concept of ODA Solution Components may also evolve to formalize AI-native wo
 
 This ADR does not define or decide the following topics:
 
-• tool lifecycle
-• model onboarding architecture
-• registry architecture
-• gateway architecture
+- tool lifecycle
+- model onboarding architecture
+- registry architecture
+- gateway architecture
 
 These topics are addressed in separate ADRs within the architecture.
