@@ -34,8 +34,9 @@ The TMF Resource Inventory API is adopted as the unified discovery registry for 
 
 Resource Inventory exposes discoverable platform resources including:
 - ODA Components
-- Interaction Interfaces
-- Agents
+- exposed Interaction Interfaces (as ExposedAPIs)
+- dependent Interaction Interfaces (as DependentAPIs)
+- Agents (Agent Card References)
 - Tools
 - Models
 
@@ -76,21 +77,22 @@ This approach avoids introducing separate registry services and maintains a sing
 
 # Agent Registry Representation
 
-Agents are represented as components exposing A2A interaction interfaces.
+Agents are represented in Resource Inventory as logical discoverable resources derived from components exposing A2A interaction interfaces.
 
 Agents appear in Resource Inventory when:
-`    apiType = a2a`
+`apiType = a2a`
+
+These entries include normalized metadata about the agent and a reference to its Agent Card.
 
 Resources meeting this criteria are exposed through the Agent Registry view.
 
 
-
 # Tool Registry Representation
 
-Tools are represented as interaction interfaces using the MCP protocol.
+Tools are represented in Resource Inventory as logical discoverable resources derived from components exposing MCP interaction interfaces.
 
 Example:
-`    apiType = mcp`
+`apiType = mcp`
 
 Interfaces meeting this criteria are exposed through the Tool Registry view.
 
@@ -102,7 +104,7 @@ No dedicated Tool CRD is introduced in this architecture phase.
 Models available within the Canvas environment are defined through the AI Gateway configuration resources.
 
 Specifically:
-    AIGatewayConfig CRD
+`AIGatewayConfig CRD`
 
 These resources define the models accessible through the platform’s AI Gateway (for example LiteLLM).
 
@@ -111,7 +113,17 @@ AIGatewayConfig CRD → Canvas Control Plane → Resource Inventory → Model Re
 
 Resource Inventory therefore acts as the model registry interface, while the configuration of models remains within Canvas declarative resources.
 
+# Registration and Deregistration Model
 
+Resource Inventory operates as a stateless discovery layer and does not persist or manage resource registrations independently.
+
+All resource information is dynamically retrieved from Canvas CRDs in the Kubernetes control plane at the time of query.
+
+- When a resource exists in the Canvas control plane, it is discoverable through Resource Inventory.
+- When a resource is updated in the Canvas control plane, the latest state is reflected in subsequent discovery queries.
+- When a resource is removed from the Canvas control plane, it is no longer returned by Resource Inventory.
+
+This ensures that Resource Inventory always reflects the current state of the Canvas environment without maintaining its own registry or synchronization lifecycle.
 
 # Metadata Representation
 
@@ -184,4 +196,3 @@ Future architecture revisions may evaluate:
 - deeper integration between Resource Inventory and agent capability metadata
 - representation of data resources within the inventory model
 - policy-based filtering of discovery results
-- extended relationship modeling for complex dependency graphs

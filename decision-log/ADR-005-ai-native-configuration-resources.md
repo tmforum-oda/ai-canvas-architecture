@@ -35,7 +35,6 @@ These resources are part of the Canvas control-plane declarative model and are r
 No separate CRDs are introduced in this phase for:
 - Agent
 - Tool
-- Model
 
 
 # Resource Model Overview
@@ -53,7 +52,7 @@ These resources together form the minimum declarative model needed to support AI
 
 # AIGatewayConfig
 
-# Purpose
+## Purpose
 
 AIGatewayConfig defines the set of AI models and associated gateway policies available to a component or workload within the Canvas environment.
 
@@ -70,7 +69,7 @@ It provides the metadata required by Canvas operators to configure:
 It also provides the source metadata used later by Resource Inventory to expose discoverable models available in the Canvas environment.
 
 
-# Architectural Interpretation
+## Architectural Interpretation
 
 Under this architecture:
 - AIGatewayConfig defines the subset of models onboarded into the Canvas environment
@@ -79,7 +78,7 @@ Under this architecture:
 - the AI Gateway uses this resource as the declarative configuration source for runtime mediation
 
 
-# Model Representation Decision
+## Model Representation Decision
 
 A separate Model CRD is not introduced in this phase.
 Instead: Models are declared inside AIGatewayConfig
@@ -92,7 +91,7 @@ This avoids introducing duplicate lifecycle resources while still allowing model
 
 # DataResourceConfig
 
-# Purpose
+## Purpose
 
 DataResourceConfig defines external data resources that may be used by agentic components.
 
@@ -105,7 +104,7 @@ It includes:
 - access management metadata
 
 
-# Architectural Interpretation
+## Architectural Interpretation
 
 Under this architecture:
 - DataResourceConfig provides the declarative data dependency configuration
