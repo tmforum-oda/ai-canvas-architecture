@@ -29,7 +29,7 @@ Introducing a dedicated Agent resource type would require:
 
 At the same time, the architecture must support standardized agent interoperability, including skill discovery and execution using open protocols.
 
-TM Forum has already adopted the A2A Protocol as the open standard for exposing agent skills and capabilities (see ADR-019).
+TM Forum has already adopted the A2A Protocol as the open standard for exposing agent skills and capabilities (see [Canvas ADR-019](https://github.com/tmforum-oda/oda-ca-docs/blob/master/Decision-Log/0019-adopt-a2a-protocol-for-agent-skill-exposure.md)).
 
 Therefore, the architecture must support agents while maintaining alignment with the ODA Component deployment model.
 
@@ -79,20 +79,18 @@ Agent capabilities and dependencies are expressed through:
 Agent capabilities are declared through the Component Specification and its interaction interface definitions.
 
 
-# Alignment with A2A Protocol Adoption ([Decision-Log/0019-adopt-a2a-protocol-for-agent-skill-exposure.md](https://github.com/tmforum-oda/oda-ca-docs/blob/9ef52c078d8f0d72a2d419ba702fdcd8efd6d2d6/Decision-Log/0019-adopt-a2a-protocol-for-agent-skill-exposure.md#19-adopt-a2a-protocol-as-open-standard-for-agent-skill-exposure))
+# Alignment with A2A Protocol Adoption in ODA Canvas
 
-This architecture aligns with the previously documented decision:
+This architecture aligns with the previously documented decision in ODA-CA Documentation: [019 — Adopt A2A Protocol as Open Standard for Agent Skill Exposure](https://github.com/tmforum-oda/oda-ca-docs/blob/master/Decision-Log/0019-adopt-a2a-protocol-for-agent-skill-exposure.md)
 
-019 — Adopt A2A Protocol as Open Standard for Agent Skill Exposure
-
-According to ADR-019:
+According to Canvas ADR-019:
 - Agents must expose skills through the A2A Protocol
 - Agents must publish an Agent Card at:
 `       /.well-known/agent-card.json`
 
 - Agent capabilities must be discoverable and interoperable
 
-Under ADR-001, this requirement is satisfied by Agentic Components exposing A2A interaction interfaces that comply with the A2A protocol.
+Under ADR-001 (this ADR), this requirement is satisfied by Agentic Components exposing A2A interaction interfaces that comply with the A2A protocol.
 
 This ensures that:
 - TM Forum agents remain interoperable
