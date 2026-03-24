@@ -16,3 +16,8 @@ In the AI-native Canvas architecture, the platform must support declarative conf
 
 While Skills can be unique to a context, there is the potential for a standards organisation such as the TM Forum to define reference Skills for Agents that 
 are viewed as universally applicable across the industry.
+
+# Decision
+
+1) That the concept is adopted as an expectation in Agent configuration
+2) That reference Skills are developed as standards for Agents that enable SDLC capabilities that exploit the TM Forum ODA artefacts.
