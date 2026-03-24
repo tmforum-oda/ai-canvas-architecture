@@ -42,6 +42,12 @@ Agent functionality is expressed through interaction interfaces exposed or consu
 
 No standalone Agent CRD is introduced in this phase.
 
+Agents are treated as a logical construct derived from component capabilities and interaction interfaces, rather than as an independently managed control-plane resource.
+
+This ensures that:
+- lifecycle management remains unified under the ODA Component model  
+- duplication of control-plane abstractions is avoided  
+- the architecture remains consistent with Kubernetes-native design principles  
 
 # Definition — Agentic Component (ODA Solution Component)
 
@@ -63,10 +69,47 @@ These interfaces define how the component participates in an agentic ecosystem.
 Agents are represented in the architecture as components exposing A2A interaction interfaces.
 
 Conceptually:
-`    Agent = Component exposing an A2A interaction interface`
+`Agent = Component exposing an A2A interaction interface`
 
-Agent identity therefore derives from the component’s exposed interaction interfaces, rather than from a dedicated resource type.
+Agent identity is derived from:
+- the component identity  
+- the exposed A2A interaction interface  
+- the published Agent Card (as per A2A protocol)  
 
+There is no separate agent identity resource in the control plane.
+
+## Agent Runtime Realization Patterns
+
+Agentic Components may be realized using different runtime deployment patterns, depending on architectural and operational requirements.
+
+### 1. Native Runtime Pattern
+
+The agent logic is deployed and executed within the Canvas platform as part of the component workload.
+
+- agent runtime is containerized and managed within Kubernetes  
+- interaction interfaces (A2A, MCP, APIs) are exposed directly by the component  
+- full lifecycle is managed within Canvas  
+
+### 2. Proxy Runtime Pattern
+
+A thin component-proxy is deployed within Canvas to expose standardized interaction interfaces, while the core agent logic executes on an external agent platform.
+
+- component acts as a proxy or façade  
+- interaction gateway mediates communication  
+- external runtime may include:
+  - agent development platforms  
+  - reasoning engines  
+  - enterprise AI services  
+
+Both patterns conform to this ADR because:
+
+- the control-plane representation remains an ODA Component  
+- interaction interfaces remain standardized and discoverable  
+- lifecycle management remains anchored in the component model  
+
+The proxy-based runtime exposure pattern is further detailed in:
+
+**ADR-008 — Agent Runtime Realization Patterns**
 
 # Agent Capability Definition
 
@@ -102,24 +145,18 @@ This ensures that:
 
 # Benefits
 
-Maintains alignment with the ODA Canvas architecture.
-
-Avoids introducing additional lifecycle models.
-
-Allows agents to be implemented using the existing component deployment framework.
-
-Ensures compatibility with A2A protocol interoperability requirements.
-
-Simplifies operator implementation and lifecycle reconciliation.
+- maintains alignment with the ODA Canvas architecture  
+- avoids introducing additional lifecycle models  
+- allows agents to be implemented using the existing component deployment framework  
+- ensures compatibility with A2A protocol interoperability requirements  
+- simplifies operator implementation and reconciliation  
 
 
 # Trade-offs
 
-Agents are not independently deployable resources.
-
-Agent identity must be derived from component metadata and exposed interfaces.
-
-Agent discovery depends on interaction interface metadata rather than a dedicated resource type.
+- agents are not independently deployable resources  
+- agent identity must be derived from component metadata and exposed interfaces  
+- agent discovery depends on interaction interface metadata rather than a dedicated resource type  
 
 
 # Future Considerations
@@ -130,6 +167,8 @@ The working group may evaluate introducing a dedicated Agent CRD in future archi
 - richer agent metadata must be managed by the control plane
 
 The concept of ODA Solution Components may also evolve to formalize AI-native workload types within the ODA architecture.
+
+The proxy-based runtime exposure model is defined separately to allow independent evolution of runtime interaction patterns.
 
 # Out of Scope
 
