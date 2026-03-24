@@ -28,32 +28,40 @@ Therefore a unified abstraction is required that allows the platform to represen
 
 # Decision
 
-The architecture introduces the concept of an Interaction Interface as a generalized abstraction representing any interaction endpoint exposed or consumed by a component.
+The architecture introduces the concept of an **Interaction Interface** as a generalized abstraction representing any interaction endpoint exposed or consumed by a component.
 
 Interaction Interfaces are implemented using the existing Canvas resource types:
-`    ExposedAPI`
-`    DependentAPI`
+```
+- ExposedAPI
+- DependentAPI
+```
 
-The interface type is distinguished using the apiType attribute.
+No changes are made to the existing resource structure or naming in this phase.
+
+The type of interaction is distinguished using the `apiType` attribute, which acts as an extensible classification mechanism for different interaction protocols.
 
 This approach allows new interaction mechanisms to be introduced without adding new resource types.
 
+Interaction Interface is a logical abstraction and does not introduce a new CRD or resource type in the control plane.
 
 
 # Supported Interface Types
 
-The following apiType values are defined for the current architecture phase:
-- openapi
-- prometheus
-- openmetrics
-- a2a
-- mcp
+The following `apiType` values are defined for the current architecture phase:
+- openapi (REST APIs)
+- prometheus (metrics scraping)
+- openmetrics (metrics standard)
+- a2a (agent-to-agent interaction)
+- mcp (tool invocation and control)
 
+This list is extensible and may be expanded in future without requiring changes to the underlying resource model.
 
 
 # Interface Visibility in the Canvas Control Plane
 
-Interaction Interfaces are represented as first-class CRD objects within the Canvas control plane.
+Interaction Interfaces are represented through existing CRD objects (`ExposedAPI`, `DependentAPI`) in the Canvas control plane.
+
+These resources expose interaction metadata via the `apiType` attribute, enabling standardized interpretation of interaction semantics.
 
 These objects can be referenced and inspected using Kubernetes APIs.
 
