@@ -146,19 +146,19 @@ The following questions require further discussion. Initial proposals added belo
 # Runtime Access Standardization
 
 Proposal:
-- Data access be standardized through hybrid support, primarily through MCP tool interfaces with an alternate option for SDK access.
-- Any backend data retrieval and/or processing required prior to returning requested data via MCP/SDK is the responsibility of the data platform, and prescribing specific mechanisms for this is out of scope and may differ by data platform. For example, Databricks' implementation may respond to MCP requests via a Genie space which queries a Databricks SQL Warehouse to return relevant data.
+- Data access should be standardized through hybrid support, primarily through MCP tool interfaces where possible with an alternate option for SDK access. MCP status as industry standard may change and/or platforms may choose not to natively advertise all data assets via MCP for various reasons.
+- Any backend data retrieval and/or processing required prior to returning requested data via MCP/SDK is the responsibility of the data platform. Prescribing specific mechanisms for this is out of scope and approaches may differ by data platform. For example, Databricks' implementation may respond to MCP requests via a Genie space which queries a Databricks SQL Warehouse to return relevant data.
 
 
 # Gateway Mediation
 
 Proposal:
-Data access should be mediated through native data platform access layer via service principal - either directly, or downstream of interaction gateway layer.
+Data access should be mediated through native data platform access layer via service principals. Where this is directly or downstream of interaction gateway layer requires additional discussion.
 
 # Data Discovery Model
 
 Proposal:
-Data resources should be discoverable through direct interaction with data provider's catalog of choice.
+Data resources should be discoverable through direct interaction with data provider's catalog.
 
 # Data Product Abstraction
 
