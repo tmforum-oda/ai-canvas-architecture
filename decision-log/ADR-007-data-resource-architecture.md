@@ -1,6 +1,6 @@
 ADR-007 — Data Resource Architecture and Access Patterns
 
-Date: 2026-03-11
+Date: 2026-03-30
 
 # Status
 
@@ -79,6 +79,7 @@ spec:
 ```
 This resource allows the Canvas control plane to understand the data dependencies of a component.
 
+Discussion topic: If agents do not create data products, and if agents only reference and interact with data products via higher level interfaces (catalog / mcp / data platform SDK), are physicalStorage characteristics still relevant? Or should they be abstracted and left to the data provider to manage?
 
 # Data Governance Responsibility
 
@@ -140,28 +141,24 @@ This topic remains open for further architecture discussion.
 
 # Open Architectural Questions
 
-The following questions require further discussion.
+The following questions require further discussion. Initial proposals added below.
 
 # Runtime Access Standardization
 
-Should data access be standardized through:
-- MCP tool interfaces
-- "or" SDK access
-- "or" hybrid approaches
+Proposal:
+- Data access be standardized through hybrid support, primarily through MCP tool interfaces with an alternate option for SDK access.
+- Any backend data retrieval and/or processing required prior to returning requested data via MCP/SDK is the responsibility of the data platform, and prescribing specific mechanisms for this is out of scope and may differ by data platform. For example, Databricks' implementation may respond to MCP requests via a Genie space which queries a Databricks SQL Warehouse to return relevant data.
+
 
 # Gateway Mediation
 
-Should data access be mediated through:
-- Interaction Gateway
-- "or" data platform access layer
-- "or" direct SDK access
+Proposal:
+Data access should be mediated through native data platform access layer via service principal - either directly, or downstream of interaction gateway layer.
 
 # Data Discovery Model
 
-Should data resources be discoverable through:
-- Resource Inventory
-- external data catalogs
-- federated discovery mechanisms
+Proposal:
+Data resources should be discoverable through direct interaction with data provider's catalog of choice.
 
 # Data Product Abstraction
 
