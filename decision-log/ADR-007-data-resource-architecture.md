@@ -1,6 +1,6 @@
 ADR-007 — Data Resource Architecture and Access Patterns
 
-Date: 2026-03-11
+Date: 2026-03-30
 
 # Status
 
@@ -61,24 +61,36 @@ The resource includes metadata such as:
 - access management metadata
 
 Example structure:
+
 ```yaml
 apiVersion: oda.tmforum.org/v1alpha1
 kind: DataResourceConfig
+metadata:
+  name: sample-agent-dataresources
+  labels:
+    oda.tmforum.org/agentName: sample-agent
 spec:
   dependentDataResources:
     - name: network-events-product
       id: DP-NET-001
-      dataProductType: table
-      physicalStorage:
-        location: s3://bucket/path
-        format: iceberg
+      # Data product characteristics
+      dataProductType: table          # e.g. table | vectorDb | stream | featureStore
+
+      # Catalog / namespace location (Databricks, etc.)
       catalogRef:
         catalog: network_ops
         schema: alarms
-        object: events_silver
+        object: events_silver        # e.g. table | view | index name
+
+      # Access management
+      accessManagement:
+        serviceAccount: svc-network-events-agent
+        accessLevel: table           # e.g. catalog | schema | table | vectorIndex
+        # Optional: reference to IAM / Unity Catalog / role bindings
+        roles:
+          - data-product-reader
 ```
 This resource allows the Canvas control plane to understand the data dependencies of a component.
-
 
 # Data Governance Responsibility
 
@@ -140,28 +152,24 @@ This topic remains open for further architecture discussion.
 
 # Open Architectural Questions
 
-The following questions require further discussion.
+The following questions require further discussion. Initial proposals added below.
 
 # Runtime Access Standardization
 
-Should data access be standardized through:
-- MCP tool interfaces
-- "or" SDK access
-- "or" hybrid approaches
+Proposal:
+- Data access should be standardized through hybrid support, primarily through MCP tool interfaces where possible with an alternate option for SDK access. MCP status as industry standard may change and/or platforms may choose not to natively advertise all data assets via MCP for various reasons.
+- Any backend data retrieval and/or processing required prior to returning requested data via MCP/SDK is the responsibility of the data platform. Prescribing specific mechanisms for this is out of scope and approaches may differ by data platform. For example, Databricks' implementation may respond to MCP requests via a Genie space which queries a Databricks SQL Warehouse to return relevant data.
+
 
 # Gateway Mediation
 
-Should data access be mediated through:
-- Interaction Gateway
-- "or" data platform access layer
-- "or" direct SDK access
+Proposal:
+Data access should be mediated through native data platform access layer via service principals. Where this is directly or downstream of interaction gateway layer requires additional discussion.
 
 # Data Discovery Model
 
-Should data resources be discoverable through:
-- Resource Inventory
-- external data catalogs
-- federated discovery mechanisms
+Proposal:
+Data resources should be discoverable through direct interaction with data provider's catalog.
 
 # Data Product Abstraction
 
