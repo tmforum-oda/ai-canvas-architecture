@@ -61,25 +61,36 @@ The resource includes metadata such as:
 - access management metadata
 
 Example structure:
+
 ```yaml
 apiVersion: oda.tmforum.org/v1alpha1
 kind: DataResourceConfig
+metadata:
+  name: sample-agent-dataresources
+  labels:
+    oda.tmforum.org/agentName: sample-agent
 spec:
   dependentDataResources:
     - name: network-events-product
       id: DP-NET-001
-      dataProductType: table
-      physicalStorage:
-        location: s3://bucket/path
-        format: iceberg
+      # Data product characteristics
+      dataProductType: table          # e.g. table | vectorDb | stream | featureStore
+
+      # Catalog / namespace location (Databricks, etc.)
       catalogRef:
         catalog: network_ops
         schema: alarms
-        object: events_silver
+        object: events_silver        # e.g. table | view | index name
+
+      # Access management
+      accessManagement:
+        serviceAccount: svc-network-events-agent
+        accessLevel: table           # e.g. catalog | schema | table | vectorIndex
+        # Optional: reference to IAM / Unity Catalog / role bindings
+        roles:
+          - data-product-reader
 ```
 This resource allows the Canvas control plane to understand the data dependencies of a component.
-
-Discussion topic: If agents do not create data products, and if agents only reference and interact with data products via higher level interfaces (catalog / mcp / data platform SDK), are physicalStorage characteristics still relevant? Or should they be abstracted and left to the data provider to manage?
 
 # Data Governance Responsibility
 
