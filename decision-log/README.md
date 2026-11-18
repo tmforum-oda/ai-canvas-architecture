@@ -43,6 +43,7 @@ Typical ADR status values include:
 | ADR-006 – Model Onboarding and AI Gateway Integration | 2026-03-10 | Proposed | ADR-006-model-onboarding.md | Project Foundation |
 | ADR-007 – Data Resource Architecture and Access Patterns | 2026-03-10 | Proposed | ADR-007-data-resource-architecture.md | Project Foundation |
 | ADR-008 - Proxy Pattern for External Agent and Tool Integration | 2026-03-17 | Proposed | ADR-008-proxy-pattern-external-integration.md | Project Foundation|
+| ADR-009 – Alignment with the Agentic AI Foundation (AAIF) | 2026-11-18 | Proposed | ADR-009-alignment-with-agentic-ai-foundation.md | Lester Thomas |
 
 ---
 
